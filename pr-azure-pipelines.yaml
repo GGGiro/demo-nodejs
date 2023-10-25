@@ -45,22 +45,10 @@ steps:
       cliProjectName: 'demo-nodejs'
       cliProjectVersion: '$(Build.BuildNumber)'
       cliSources: '.'
-      # extraProperties: |
-      #   # Additional properties that will be passed to the scanner, 
-      #   # Put one key=value per line, example:
-      #   # sonar.exclusions=**/*.bin
-      #   sonar.sources=.
-      #   sonar.testExecutionReportPaths=reports/test-reporter.xml
-      #   sonar.javascript.lcov.reportPaths=reports/lcov.info
-      #   sonar.test.inclusions=**/*.test.js
-      #   sonar.exclusions=node_modules/**/*, reports/**/*
-      #   sonar.language=js
-      #   # sonar.sourceEncoding=UTF-8
-      #   #sonar.host.url=https://sonarcloud.io
 
-  # - task: SonarCloudPublish@1
-  #   inputs:
-  #     pollingTimeoutSec: '300'
+  - task: SonarCloudPublish@1
+    inputs:
+      pollingTimeoutSec: '300'
 
   # - task: ArchiveFiles@2
   #   condition: always()
