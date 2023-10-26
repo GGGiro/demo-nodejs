@@ -51,7 +51,7 @@ steps:
       cliProjectName: 'demo-nodejs'
       cliSources: '.'
       extraProperties: |
-        sonar.flex.cobertura.reportPaths=$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
+        sonar.javascript.lcov.reportPaths=$(System.DefaultWorkingDirectory)/coverage/lcov.info
     displayName: 'SonarCloud Setup'
     
   - task: SonarCloudAnalyze@1
