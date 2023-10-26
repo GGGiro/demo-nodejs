@@ -17,6 +17,7 @@
     "supertest": "^6.3.3"
   },
   "jest": {
-    "coverageReporters": ["cobertura", "lcov"]
+    "coverageReporters": ["cobertura", "lcov"],
+    "coveragePathIgnorePatterns": ["/node_modules/", "/*\\.spec\\.js/"]
   }
 }

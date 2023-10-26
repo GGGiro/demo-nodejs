@@ -1,9 +1,9 @@
 name: $(version).$(Build.BuildId)$(buildPipelineSuffix)
 
+trigger: none
+
 pr:
-  branches:
-    include:
-    - main
+  - main
 
 pool:
   vmImage: ubuntu-latest
