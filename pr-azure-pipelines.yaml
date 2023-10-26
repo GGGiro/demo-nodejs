@@ -28,7 +28,7 @@ steps:
       cliProjectName: 'demo-nodejs'
       cliSources: '.'
       extraProperties: |
-        sonar.javascript.lcov.reportPaths=coverage/lcov.info
+        sonar.flex.cobertura.reportPaths=$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
     displayName: 'SonarCloud Setup'
 
   - task: JFrogNpm@1
@@ -48,6 +48,11 @@ steps:
 
   - script: npm run test
     displayName: 'npm run test'
+
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: Cobertura
+      summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
 
   - task: SonarCloudAnalyze@1
     displayName: 'SonarCloud Analyze'

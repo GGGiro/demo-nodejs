@@ -4,7 +4,7 @@
   "description": "demo app",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage=true",
+    "test": "jest --coverage=true --coverageReporters=cobertura",
     "lint": "eslint"
   },
   "license": "UNLICENSED",
