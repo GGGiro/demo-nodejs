@@ -24,10 +24,10 @@ steps:
       organization: 'gggiro'
       scannerMode: 'CLI'
       configMode: 'manual'
-      cliProjectKey: 'demo-nodejs'
+      cliProjectKey: 'GGGiro_demo-nodejs'
       cliProjectName: 'demo-nodejs'
-      cliProjectVersion: '$(Build.BuildNumber)'
       cliSources: '.'
+    displayName: 'SonarCloud Setup'
 
   - task: JFrogNpm@1
     inputs:
@@ -39,6 +39,7 @@ steps:
       buildName: '$(Build.DefinitionName)'
       buildNumber: '$(Build.BuildNumber)'
       arguments: '--legacy-peer-deps'
+    displayName: 'npm install'
 
   - script: npm run lint
     displayName: 'npm run lint'
