@@ -46,18 +46,10 @@ steps:
   - script: npm run test
     displayName: 'npm run test'
 
-- task: SonarCloudAnalyze@1
-  displayName: 'SonarCloud Analyze'
+  - task: SonarCloudAnalyze@1
+    displayName: 'SonarCloud Analyze'
 
   - task: SonarCloudPublish@1
     inputs:
       pollingTimeoutSec: '300'
-  displayName: 'SonarCloud Publish Report'
-
-  # - task: ArchiveFiles@2
-  #   condition: always()
-  #   displayName: 'Archive files'
-  #   inputs:
-  #     rootFolderOrFile: '$(Build.Repository.LocalPath)'
-  #     includeRootFolder: True
-  #     verbose: true
+    displayName: 'SonarCloud Publish Report'
