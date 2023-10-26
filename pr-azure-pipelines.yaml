@@ -27,6 +27,8 @@ steps:
       cliProjectKey: 'GGGiro_demo-nodejs'
       cliProjectName: 'demo-nodejs'
       cliSources: '.'
+      extraProperties: |
+        sonar.javascript.lcov.reportPaths=coverage/lcov.info
     displayName: 'SonarCloud Setup'
 
   - task: JFrogNpm@1
