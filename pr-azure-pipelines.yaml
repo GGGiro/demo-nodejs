@@ -18,6 +18,17 @@ steps:
       versionSpec: '18.x'
     displayName: 'Install Node.js'
 
+  - task: SonarCloudPrepare@1
+    inputs:
+      SonarCloud: 'GGGiro SonarCloud'
+      organization: 'gggiro'
+      scannerMode: 'CLI'
+      configMode: 'manual'
+      cliProjectKey: 'demo-nodejs'
+      cliProjectName: 'demo-nodejs'
+      cliProjectVersion: '$(Build.BuildNumber)'
+      cliSources: '.'
+
   - task: JFrogNpm@1
     inputs:
       command: 'install'
@@ -34,17 +45,6 @@ steps:
 
   - script: npm run test
     displayName: 'npm run test'
-
-  - task: SonarCloudPrepare@1
-    inputs:
-      SonarCloud: 'GGGiro SonarCloud'
-      organization: 'gggiro'
-      scannerMode: 'CLI'
-      configMode: 'manual'
-      cliProjectKey: 'demo-nodejs'
-      cliProjectName: 'demo-nodejs'
-      cliProjectVersion: '$(Build.BuildNumber)'
-      cliSources: '.'
 
   - task: SonarCloudPublish@1
     inputs:
