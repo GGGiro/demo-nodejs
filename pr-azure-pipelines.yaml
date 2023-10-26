@@ -18,6 +18,29 @@ steps:
       versionSpec: '18.x'
     displayName: 'Install Node.js'
 
+  - task: SonarCloudPrepare@1
+    inputs:
+      SonarCloud: 'GGGiro SonarCloud'
+      organization: 'gggiro'
+      scannerMode: 'CLI'
+      configMode: 'manual'
+      cliProjectKey: 'demo-nodejs'
+      cliProjectName: 'demo-nodejs'
+      cliProjectVersion: '$(Build.BuildNumber)'
+      cliSources: '.'
+      extraProperties: |
+        # Additional properties that will be passed to the scanner, 
+        # Put one key=value per line, example:
+        # sonar.exclusions=**/*.bin
+        sonar.sources=.
+        sonar.testExecutionReportPaths=reports/test-reporter.xml
+        sonar.javascript.lcov.reportPaths=reports/lcov.info
+        sonar.test.inclusions=**/*.test.js
+        sonar.exclusions=node_modules/**/*, reports/**/*
+        sonar.language=js
+        # sonar.sourceEncoding=UTF-8
+        #sonar.host.url=https://sonarcloud.io
+
   - task: JFrogNpm@1
     inputs:
       command: 'install'
@@ -35,25 +58,18 @@ steps:
   - script: npm run test
     displayName: 'npm run test'
 
-  - task: SonarCloudPrepare@1
-    inputs:
-      SonarCloud: 'GGGiro SonarCloud'
-      organization: 'gggiro'
-      scannerMode: 'CLI'
-      configMode: 'manual'
-      cliProjectKey: 'demo-nodejs'
-      cliProjectName: 'demo-nodejs'
-      cliProjectVersion: '$(Build.BuildNumber)'
-      cliSources: '.'
-
   - task: SonarCloudPublish@1
     inputs:
       pollingTimeoutSec: '300'
 
-  # - task: ArchiveFiles@2
-  #   condition: always()
-  #   displayName: 'Archive files'
-  #   inputs:
-  #     rootFolderOrFile: '$(Build.Repository.LocalPath)'
-  #     includeRootFolder: True
-  #     verbose: true
+  - task: ArchiveFiles@2
+    condition: always()
+    displayName: 'Archive files'
+    inputs:
+      rootFolderOrFile: '$(Build.Repository.LocalPath)'
+      includeRootFolder: True
+      verbose: true
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish artifact'
+    condition: succeededOrFailed()
